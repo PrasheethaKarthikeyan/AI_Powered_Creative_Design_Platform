@@ -11,8 +11,9 @@ import { LogHistory } from '@/components/log-history';
 import { FollowTheFirefly } from '@/components/follow-the-firefly';
 import { PeripheralVisionChallenge } from '@/components/peripheral-vision-challenge';
 import { GlimmeringVistas } from '@/components/glimmering-vistas';
+import { CheckupScheduler } from '@/components/checkup-scheduler';
 
-import { CalendarCheck, Apple, Dumbbell, History, Gamepad2 } from 'lucide-react';
+import { CalendarCheck, Apple, Dumbbell, History, Gamepad2, Timer } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -29,9 +30,12 @@ export default function Home() {
       <AppHeader />
       <main className="flex-1 container mx-auto p-4 md:p-8">
         <Tabs defaultValue="daily-check" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 h-auto md:h-10">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto md:h-10">
             <TabsTrigger value="daily-check">
               <CalendarCheck className="mr-2 h-4 w-4" /> Daily Check
+            </TabsTrigger>
+            <TabsTrigger value="scheduler">
+              <Timer className="mr-2 h-4 w-4" /> Scheduler
             </TabsTrigger>
             <TabsTrigger value="exercises">
               <Dumbbell className="mr-2 h-4 w-4" /> Exercises
@@ -49,6 +53,10 @@ export default function Home() {
           
           <TabsContent value="daily-check" className="mt-6">
             <DailyCheck onLogAdded={handleLogAdded} />
+          </TabsContent>
+
+          <TabsContent value="scheduler" className="mt-6">
+            <CheckupScheduler />
           </TabsContent>
           
           <TabsContent value="exercises" className="mt-6">
