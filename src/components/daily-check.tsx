@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -14,6 +14,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Bot, Glasses, Loader2 } from 'lucide-react';
 import { Separator } from './ui/separator';
+import { Skeleton } from './ui/skeleton';
 
 const formSchema = z.object({
   eyeDryness: z.number().min(0).max(10),
@@ -42,6 +43,11 @@ export function DailyCheck({ onLogAdded }: DailyCheckProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [aiAdvice, setAiAdvice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const form = useForm<DailyCheckFormValues>({
     resolver: zodResolver(formSchema),
@@ -76,6 +82,33 @@ export function DailyCheck({ onLogAdded }: DailyCheckProps) {
       setIsLoading(false);
     }
   }
+
+  if (!isClient) {
+    return (
+        <Card className="w-full">
+            <CardHeader>
+                <Skeleton className="h-8 w-1/2" />
+                <Skeleton className="h-4 w-3/4" />
+            </CardHeader>
+            <CardContent className="space-y-8">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {symptomFields.map(({ name }) => (
+                        <div key={name} className="space-y-2">
+                            <Skeleton className="h-5 w-1/3" />
+                            <Skeleton className="h-5 w-full" />
+                        </div>
+                    ))}
+                </div>
+                <Separator />
+                <Skeleton className="h-12 w-full" />
+            </CardContent>
+            <CardFooter>
+                <Skeleton className="h-12 w-full" />
+            </CardFooter>
+        </Card>
+    );
+  }
+
 
   return (
     <Card className="w-full">
