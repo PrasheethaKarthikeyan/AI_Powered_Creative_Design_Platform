@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -22,6 +22,7 @@ import { Calendar } from './ui/calendar';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Input } from './ui/input';
+import { Skeleton } from './ui/skeleton';
 
 const VisionStatusSchema = z.enum([
   'normal',
@@ -64,6 +65,11 @@ export function CheckupScheduler() {
   const [isLoading, setIsLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState<AICheckupSchedulerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const form = useForm<CheckupFormValues>({
     resolver: zodResolver(FormSchema),
@@ -96,6 +102,39 @@ export function CheckupScheduler() {
       setIsLoading(false);
     }
   }
+
+  if (!isClient) {
+    return (
+      <Card className="w-full">
+        <CardHeader>
+          <Skeleton className="h-8 w-1/2" />
+          <Skeleton className="h-4 w-3/4" />
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+          <Skeleton className="h-12 w-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-1/4" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Skeleton className="h-8 w-full" />
+              <Skeleton className="h-8 w-full" />
+              <Skeleton className="h-8 w-full" />
+              <Skeleton className="h-8 w-full" />
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Skeleton className="h-12 w-full" />
+        </CardFooter>
+      </Card>
+    );
+  }
+
 
   return (
     <Card className="w-full">
