@@ -23,6 +23,7 @@ const formSchema = z.object({
   roughness: z.number().min(0).max(10),
   headache: z.number().min(0).max(10),
   eyeStrain: z.number().min(0).max(10),
+  redness: z.number().min(0).max(10),
   glassesUser: z.boolean(),
 });
 
@@ -38,6 +39,7 @@ const symptomFields: { name: keyof Omit<DailyCheckFormValues, 'glassesUser'>; la
     { name: 'roughness', label: 'Roughness' },
     { name: 'headache', label: 'Headache' },
     { name: 'eyeStrain', label: 'Eye Strain' },
+    { name: 'redness', label: 'Redness' },
 ];
 
 export function DailyCheck({ onLogAdded }: DailyCheckProps) {
@@ -58,6 +60,7 @@ export function DailyCheck({ onLogAdded }: DailyCheckProps) {
       roughness: 0,
       headache: 0,
       eyeStrain: 0,
+      redness: 0,
       glassesUser: false,
     },
   });

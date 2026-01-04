@@ -45,6 +45,7 @@ export function LogHistory({ logs }: LogHistoryProps) {
                 <TableHead>Roughness</TableHead>
                 <TableHead>Headache</TableHead>
                 <TableHead>Strain</TableHead>
+                <TableHead>Redness</TableHead>
                 <TableHead>Glasses</TableHead>
                 <TableHead className="min-w-[300px]">AI Advice</TableHead>
               </TableRow>
@@ -60,6 +61,7 @@ export function LogHistory({ logs }: LogHistoryProps) {
                   <TableCell>{log.symptoms.roughness}</TableCell>
                   <TableCell>{log.symptoms.headache}</TableCell>
                   <TableCell>{log.symptoms.eyeStrain}</TableCell>
+                  <TableCell>{log.symptoms.redness}</TableCell>
                   <TableCell>{log.symptoms.glassesUser ? 'Yes' : 'No'}</TableCell>
                   <TableCell className="text-muted-foreground text-xs">{log.advice}</TableCell>
                 </TableRow>

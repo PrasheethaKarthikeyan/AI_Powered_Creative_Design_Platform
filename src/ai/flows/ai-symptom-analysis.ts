@@ -21,6 +21,7 @@ const AISymptomAnalysisInputSchema = z.object({
   roughness: z.number().min(0).max(10).describe('Rating of roughness (0-10).'),
   headache: z.number().min(0).max(10).describe('Rating of headache (0-10).'),
   eyeStrain: z.number().min(0).max(10).describe('Rating of eye strain (0-10).'),
+  redness: z.number().min(0).max(10).describe('Rating of eye redness (0-10).'),
   glassesUser: z.boolean().describe('Whether the user wears glasses or not.'),
 });
 export type AISymptomAnalysisInput = z.infer<typeof AISymptomAnalysisInputSchema>;
@@ -47,11 +48,12 @@ const aiSymptomAnalysisPrompt = ai.definePrompt({
 *   **Roughness (0-10):** Severity of roughness.
 *   **Headache (0-10):** Severity of headache.
 *   **Eye Strain (0-10):** Severity of eye strain.
+*   **Redness (0-10):** Severity of eye redness.
 *   **Glasses User:** Whether the user wears glasses.
 
 Give personalized advice including screen time reduction, blinking reminders, eye rest techniques, and when to consult an eye doctor. Focus on actionable steps the user can take.
 
-Symptoms: Eye Dryness: {{{eyeDryness}}}, Itching: {{{itching}}}, Roughness: {{{roughness}}}, Headache: {{{headache}}}, Eye Strain: {{{eyeStrain}}}. Glasses User: {{{glassesUser}}}.
+Symptoms: Eye Dryness: {{{eyeDryness}}}, Itching: {{{itching}}}, Roughness: {{{roughness}}}, Headache: {{{headache}}}, Eye Strain: {{{eyeStrain}}}, Redness: {{{redness}}}. Glasses User: {{{glassesUser}}}.
 
 Do not provide any disclaimers or caveats.
 Response: `,
