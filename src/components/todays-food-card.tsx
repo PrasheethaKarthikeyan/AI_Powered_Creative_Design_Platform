@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Lightbulb } from 'lucide-react';
+import { Skeleton } from './ui/skeleton';
 
 type EyeFood = {
     food: string;
@@ -67,12 +68,29 @@ const dailyFoods: EyeFood[] = [
 
 export function TodaysFoodCard() {
     const [todaysFood, setTodaysFood] = useState<EyeFood | null>(null);
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        const dayOfYear = new Date().getUTCDate(); // Simple day of month
-        const foodIndex = dayOfYear % dailyFoods.length;
+        setIsClient(true);
+        const dayOfMonth = new Date().getDate(); // Use getDate() for day of month
+        const foodIndex = dayOfMonth % dailyFoods.length;
         setTodaysFood(dailyFoods[foodIndex]);
     }, []);
+
+    if (!isClient) {
+        return (
+             <Card className="bg-primary/5 border-primary/20">
+                <CardHeader>
+                    <Skeleton className="h-6 w-3/4" />
+                    <Skeleton className="h-4 w-full" />
+                </CardHeader>
+                <CardContent className="space-y-4">
+                     <Skeleton className="h-10 w-1/2" />
+                     <Skeleton className="h-8 w-full" />
+                </CardContent>
+            </Card>
+        );
+    }
 
     if (!todaysFood) {
         return null;
