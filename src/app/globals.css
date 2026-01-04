@@ -96,68 +96,99 @@ body {
   }
 }
 
-/* Eye Animation */
-@keyframes open-top-lid {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+/* New Eye Animation V2 */
+@keyframes fade-in-background {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes open-bottom-lid {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+@keyframes open-top-lid-v2 {
+  from { transform: translateY(0); }
+  to { transform: translateY(-110%); }
 }
 
-@keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+@keyframes open-bottom-lid-v2 {
+  from { transform: translateY(0); }
+  to { transform: translateY(110%); }
 }
 
-@keyframes zoom-in-pupil {
-    0% { transform: scale(0); opacity: 0; }
-    60% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+@keyframes iris-emerge {
+  0% { transform: scale(0.2); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pupil-contract {
+  0% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes light-ripple-effect {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes logo-fade-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes animation-container-fade-out {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.1); }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.5s ease-in-out;
+  animation: fade-in-background 0.5s ease-in-out forwards;
 }
 
-.eye-lid {
-  animation: fade-in 1s ease-in-out;
+.eye-animation-container {
+    animation: fade-in-background 0.5s ease-in-out, animation-container-fade-out 0.8s ease-in-out 3.2s forwards;
 }
 
-.top-lid {
-  animation-name: open-top-lid, fade-in;
-  animation-duration: 1.5s, 1s;
-  animation-delay: 1s, 0s;
+.eye-lid-v2 {
+  opacity: 0;
+  animation: fade-in-background 1s ease-in-out 0.2s forwards;
+}
+
+.top-lid-v2 {
+  animation-name: open-top-lid-v2, fade-in-background;
+  animation-duration: 1.2s, 1s;
+  animation-delay: 1.5s, 0.2s;
   animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
 }
 
-.bottom-lid {
-  animation-name: open-bottom-lid, fade-in;
-  animation-duration: 1.5s, 1s;
-  animation-delay: 1s, 0s;
+.bottom-lid-v2 {
+  animation-name: open-bottom-lid-v2, fade-in-background;
+  animation-duration: 1.2s, 1s;
+  animation-delay: 1.5s, 0.2s;
   animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
 }
 
-.pupil-container {
+.iris-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   opacity: 0;
-  animation: zoom-in-pupil 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: iris-emerge 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards;
 }
 
-.pupil {
+.iris {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: hsl(var(--primary));
+  background: radial-gradient(circle, #A7C7E7 0%, #38BDF8 50%, #1F4FD8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,13 +196,34 @@ body {
   overflow: hidden;
 }
 
-.iris-highlight {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 10px;
-  height: 10px;
-  background-color: hsla(0, 0%, 100%, 0.5);
+.pupil-v2 {
+  width: 40%;
+  height: 40%;
+  background-color: #0B0F1A;
   border-radius: 50%;
-  filter: blur(2px);
+  animation: pupil-contract 1s ease-out 2s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.light-ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid #FFC857;
+    opacity: 0;
+    animation: light-ripple-effect 1.2s ease-out 2.2s forwards;
+}
+
+.app-logo-container {
+    opacity: 0;
+    animation: logo-fade-in 1s ease-out 2.5s forwards;
+}
+
+.app-logo {
+    width: 20px;
+    height: 20px;
 }
