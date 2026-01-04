@@ -10,6 +10,7 @@ import { FoodReminders } from '@/components/food-reminders';
 import { LogHistory } from '@/components/log-history';
 import { FollowTheFirefly } from '@/components/follow-the-firefly';
 import { PeripheralVisionChallenge } from '@/components/peripheral-vision-challenge';
+import { GlimmeringVistas } from '@/components/glimmering-vistas';
 
 import { CalendarCheck, Apple, Dumbbell, History, Gamepad2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -60,15 +61,19 @@ export default function Home() {
 
           <TabsContent value="game" className="mt-6">
             <Tabs defaultValue={activeGame} onValueChange={setActiveGame} className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="follow-the-firefly">Follow the Firefly</TabsTrigger>
                 <TabsTrigger value="peripheral-challenge">Peripheral Challenge</TabsTrigger>
+                <TabsTrigger value="glimmering-vistas">Glimmering Vistas</TabsTrigger>
               </TabsList>
               <TabsContent value="follow-the-firefly" className="mt-6">
                 <FollowTheFirefly />
               </TabsContent>
               <TabsContent value="peripheral-challenge" className="mt-6">
                 <PeripheralVisionChallenge />
+              </TabsContent>
+              <TabsContent value="glimmering-vistas" className="mt-6">
+                <GlimmeringVistas />
               </TabsContent>
             </Tabs>
           </TabsContent>
