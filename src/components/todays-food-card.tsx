@@ -79,7 +79,7 @@ export function TodaysFoodCard() {
 
     if (!isClient) {
         return (
-             <Card className="bg-primary/5 border-primary/20">
+             <Card className="bg-secondary/20 border-secondary/30">
                 <CardHeader>
                     <Skeleton className="h-6 w-3/4" />
                     <Skeleton className="h-4 w-full" />
@@ -97,9 +97,9 @@ export function TodaysFoodCard() {
     }
 
     return (
-        <Card className="bg-primary/5 border-primary/20">
+        <Card className="bg-secondary/20 border-secondary/30">
             <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-primary">
+                <CardTitle className="flex items-center gap-2 text-secondary-foreground">
                     {todaysFood.emoji} Today’s Eye-Care Food: {todaysFood.food}
                 </CardTitle>
                 <CardDescription>{todaysFood.why}</CardDescription>
@@ -109,7 +109,7 @@ export function TodaysFoodCard() {
                     <h4 className="font-semibold text-sm mb-2">Key Nutrients:</h4>
                     <div className="flex flex-wrap gap-2">
                         {todaysFood.nutrients.map(nutrient => (
-                            <Badge key={nutrient} variant="secondary" className="bg-accent/50 text-accent-foreground">{nutrient}</Badge>
+                            <Badge key={nutrient} variant="secondary" className="bg-accent/80 text-accent-foreground">{nutrient}</Badge>
                         ))}
                     </div>
                 </div>

@@ -7,9 +7,8 @@ import { z } from 'zod';
 import { format } from "date-fns";
 import { 
   scheduleCheckup,
-  type AICheckupSchedulerInput,
-  type AICheckupSchedulerOutput,
 } from '@/ai/flows/ai-checkup-scheduler';
+import type { AICheckupSchedulerInput, AICheckupSchedulerOutput } from '@/ai/flows/ai-checkup-scheduler';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';

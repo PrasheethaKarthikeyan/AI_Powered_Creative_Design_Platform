@@ -15,6 +15,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Bot, Glasses, Loader2 } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { Skeleton } from './ui/skeleton';
+import type { AISymptomAnalysisInput } from '@/ai/flows/ai-symptom-analysis';
 
 const formSchema = z.object({
   eyeDryness: z.number().min(0).max(10),
@@ -66,12 +67,12 @@ export function DailyCheck({ onLogAdded }: DailyCheckProps) {
     setAiAdvice(null);
     setError(null);
     try {
-      const result = await analyzeSymptoms(data);
+      const result = await analyzeSymptoms(data as AISymptomAnalysisInput);
       setAiAdvice(result.advice);
       const newLog: SymptomLog = {
         id: new Date().toISOString(),
         date: new Date(),
-        symptoms: data,
+        symptoms: data as AISymptomAnalysisInput,
         advice: result.advice,
       };
       onLogAdded(newLog);
