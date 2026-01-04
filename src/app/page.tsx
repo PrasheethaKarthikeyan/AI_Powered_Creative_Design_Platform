@@ -9,12 +9,15 @@ import { EyeExercises } from '@/components/eye-exercises';
 import { FoodReminders } from '@/components/food-reminders';
 import { LogHistory } from '@/components/log-history';
 import { FollowTheFirefly } from '@/components/follow-the-firefly';
+import { PeripheralVisionChallenge } from '@/components/peripheral-vision-challenge';
 
 import { CalendarCheck, Apple, Dumbbell, History, Gamepad2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function Home() {
   const [logs, setLogs] = useState<SymptomLog[]>([]);
+  const [activeGame, setActiveGame] = useState('follow-the-firefly');
 
   const handleLogAdded = (newLog: SymptomLog) => {
     setLogs(prevLogs => [newLog, ...prevLogs]);
@@ -36,7 +39,7 @@ export default function Home() {
               <Apple className="mr-2 h-4 w-4" /> Food Care
             </TabsTrigger>
              <TabsTrigger value="game">
-              <Gamepad2 className="mr-2 h-4 w-4" /> Game
+              <Gamepad2 className="mr-2 h-4 w-4" /> Games
             </TabsTrigger>
             <TabsTrigger value="history">
               <History className="mr-2 h-4 w-4" /> Log History
@@ -56,7 +59,18 @@ export default function Home() {
           </TabsContent>
 
           <TabsContent value="game" className="mt-6">
-            <FollowTheFirefly />
+            <Tabs defaultValue={activeGame} onValueChange={setActiveGame} className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="follow-the-firefly">Follow the Firefly</TabsTrigger>
+                <TabsTrigger value="peripheral-challenge">Peripheral Challenge</TabsTrigger>
+              </TabsList>
+              <TabsContent value="follow-the-firefly" className="mt-6">
+                <FollowTheFirefly />
+              </TabsContent>
+              <TabsContent value="peripheral-challenge" className="mt-6">
+                <PeripheralVisionChallenge />
+              </TabsContent>
+            </Tabs>
           </TabsContent>
           
           <TabsContent value="history" className="mt-6">
