@@ -95,3 +95,83 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Eye Animation */
+@keyframes open-top-lid {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes open-bottom-lid {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes zoom-in-pupil {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.eye-lid {
+  animation: fade-in 1s ease-in-out;
+}
+
+.top-lid {
+  animation-name: open-top-lid, fade-in;
+  animation-duration: 1.5s, 1s;
+  animation-delay: 1s, 0s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-lid {
+  animation-name: open-bottom-lid, fade-in;
+  animation-duration: 1.5s, 1s;
+  animation-delay: 1s, 0s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pupil-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  animation: zoom-in-pupil 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.pupil {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.iris-highlight {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  background-color: hsla(0, 0%, 100%, 0.5);
+  border-radius: 50%;
+  filter: blur(2px);
+}

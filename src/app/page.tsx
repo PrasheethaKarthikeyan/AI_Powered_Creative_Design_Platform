@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { SymptomLog } from '@/lib/types';
 
 import { AppHeader } from '@/components/app-header';
@@ -12,21 +12,33 @@ import { FollowTheFirefly } from '@/components/follow-the-firefly';
 import { PeripheralVisionChallenge } from '@/components/peripheral-vision-challenge';
 import { GlimmeringVistas } from '@/components/glimmering-vistas';
 import { CheckupScheduler } from '@/components/checkup-scheduler';
+import { OpeningAnimation } from '@/components/opening-animation';
 
 import { CalendarCheck, Apple, Dumbbell, History, Gamepad2, Timer } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from '@/components/ui/card';
 
 export default function Home() {
   const [logs, setLogs] = useState<SymptomLog[]>([]);
   const [activeGame, setActiveGame] = useState('follow-the-firefly');
+  const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAnimation(false);
+    }, 4000); // Animation duration + a little extra
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLogAdded = (newLog: SymptomLog) => {
     setLogs(prevLogs => [newLog, ...prevLogs]);
   };
+  
+  if (showAnimation) {
+    return <OpeningAnimation />;
+  }
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-background">
+    <div className="flex min-h-screen w-full flex-col bg-background animate-fade-in">
       <AppHeader />
       <main className="flex-1 container mx-auto p-4 md:p-8">
         <Tabs defaultValue="daily-check" className="w-full">
