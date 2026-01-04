@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Leaf, Fish, Carrot, Sun } from 'lucide-react';
+import { TodaysFoodCard } from './todays-food-card';
 
 const foods = [
   {
@@ -26,13 +27,16 @@ const foods = [
 
 export function FoodReminders() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="text-center space-y-1">
         <h2 className="text-2xl font-bold font-headline">Nourish Your Eyes</h2>
         <p className="text-muted-foreground">
           Incorporate these eye-healthy foods into your diet for better vision wellness.
         </p>
       </div>
+
+      <TodaysFoodCard />
+
       <div className="grid gap-4 md:grid-cols-2">
         {foods.map((food, index) => (
           <Card key={index}>
